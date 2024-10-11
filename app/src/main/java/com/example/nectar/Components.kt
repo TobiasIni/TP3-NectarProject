@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -19,13 +20,25 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ButtonDefaults.buttonColors
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.darkColorScheme
+import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -34,6 +47,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -319,7 +334,239 @@ fun OnBoard() {
             BotonPrincipal(body = "Get Started", color = verdePersonalizado , onClick = {})
         }
         }
+
+    }
+@Composable
+fun SuccessScreen(modifier: Modifier = Modifier) {
+    Surface(modifier = modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp), // Añadir padding general
+            verticalArrangement = Arrangement.SpaceBetween,
+            horizontalAlignment = Alignment.CenterHorizontally // Centra horizontalmente todo el contenido
+        ) {
+            // Imagen centrada
+            Image(
+                painter = painterResource(id = R.drawable.success_icon1),
+                contentDescription = null,
+                modifier = Modifier
+                    .size(300.dp)
+                    .padding(top = 100.dp)
+            )
+
+            // Texto centrado
+            Text(
+                text = "Your Order has been accepted",
+                style = MaterialTheme.typography.headlineMedium,
+                modifier = Modifier
+                    .padding(bottom = 10.dp)
+                    .align(Alignment.CenterHorizontally) // Alinea el texto en el centro
+
+            )
+            Text(
+                text="Your items has been placed and is on \n" +
+                        "it’s way to being processed",
+                style = MaterialTheme.typography.labelSmall,
+                color= Color.Gray
+            )
+
+            // Botones uno encima del otro
+            Column(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                // Botón "Track Order"
+                Button(
+                    onClick = { /* Acción para track order */ },
+                    colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF53B175)),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 10.dp) // Separación entre los botones
+                ) {
+                    Text(text = "Track Order", color = Color.White)
+                }
+
+                // Botón "Back to Home"
+                Button(
+                    onClick = { /* Acción para back to home */ },
+                    colors = ButtonDefaults.buttonColors(containerColor = Color.White),
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text(text = "Back to Home", color = Color.Black)
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun ThemeSwitcher() {
+    // Estado que determina si el tema es oscuro (true) o claro (false)
+    var isDarkTheme by remember { mutableStateOf(false) }
+
+    // Definimos los esquemas de colores para los modos oscuro y claro
+    val darkColors = darkColorScheme(
+        primary = Color(0xFFBB86FC),
+        onPrimary = Color.White,
+        background = Color(0xFF121212),
+        onBackground = Color.White
+    )
+    val lightColors = lightColorScheme(
+        primary = Color(0xFF6200EE),
+        onPrimary = Color.White,
+        background = Color(0xFFFFFFFF),
+        onBackground = Color.Black
+    )
+
+    // Aplicamos el tema correspondiente según el estado (oscuro o claro)
+    MaterialTheme(colorScheme = if (isDarkTheme) darkColors else lightColors) {
+        // Contenedor principal de la pantalla
+        Surface(modifier = Modifier.fillMaxSize()) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp),  // Añadir padding para separar el contenido de los bordes
+                verticalAlignment = Alignment.CenterVertically, // Centra verticalmente los elementos
+                horizontalArrangement = Arrangement.SpaceBetween // Distribuye los elementos
+            ) {
+                // Texto de "Dark mode" alineado a la izquierda
+                Text(text = "Dark mode")
+
+                // Agregamos el icono clicable para cambiar el tema, alineado a la derecha
+                val icon: Painter = painterResource(id = R.drawable.darkmode_icon)
+                Image(
+                    painter = icon,
+                    contentDescription = "Toggle Dark Mode", // Descripción para accesibilidad
+                    modifier = Modifier
+                        .size(40.dp) // Ajusta el tamaño del icono si es necesario
+                        .clickable {
+                            // Al hacer clic, cambiamos entre los temas oscuro y claro
+                            isDarkTheme = !isDarkTheme
+                        }
+                )
+            }
+        }
+    }
+}
+
+@Preview
+@Composable
+fun PreviewThemeSwitcher() {
+    ThemeSwitcher()
+}
+
+
+@Composable
+fun SplashScreen(){
+    Splash()
+}
+
+@Composable
+fun Splash(){
+
+    Column (
+        modifier = Modifier
+            .fillMaxSize()
+            .background (Color(0xFF53B175)),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement =  Arrangement.Center
+    ){
+        val icon: Painter = painterResource(id = R.drawable.icon_nectar)
+        Image(
+            painter = icon,
+            contentDescription = "Logo Nectar", // Descripción para accesibilidad
+            modifier = Modifier
+                .size(150.dp,100.dp),
+            colorFilter = ColorFilter.tint(Color.White)
+        )// Ajusta el tamaño del icono si es necesario
+
+        Text(
+            "online groceriet",
+            fontSize =10.sp,
+            fontWeight=FontWeight.Bold,
+            color = Color.White
+
+        )
     }
 
+
+}
+
+@Preview(showBackground=true)
+@Composable
+fun SplashScreenPreview(){
+    Splash()
+}
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun CustomTopBar(title: String) {
+    TopAppBar(
+        title = { Text(text = title) },
+        navigationIcon = {
+            IconButton(onClick = { /* Acción para abrir el menú */ }) {
+                Icon(Icons.Default.Menu, contentDescription = "Menu")
+            }
+        },
+        colors = TopAppBarDefaults.smallTopAppBarColors(containerColor = Color.White),
+
+        )
+}
+
+@Preview
+@Composable
+fun PreviewTopBar() {
+    CustomTopBar(title = "Shop")
+}
+
+@Composable
+fun BottomNavigationBar() {
+    var selectedItem by remember { mutableStateOf(0) }
+
+    // Lista de elementos de navegación con títulos y recursos de íconos
+    val items = listOf(
+        BottomNavItem("Shop", R.drawable.icon_shop),
+        BottomNavItem("Explore", R.drawable.icon_search),
+        BottomNavItem("Cart", R.drawable.icon_cart),
+        BottomNavItem("Favourite", R.drawable.icon_like),
+        BottomNavItem("Account", R.drawable.icon_user)
+    )
+
+    val selectedColor = Color(0xFF53B175) // Verde oscuro
+    val unselectedColor = Color.Black
+
+    NavigationBar(
+        containerColor = Color.White,
+        contentColor = Color.Black
+    ) {
+        items.forEachIndexed { index, item ->
+            NavigationBarItem(
+                icon = {
+                    Image(
+                        painter = painterResource(id = item.iconRes),
+                        contentDescription = item.title,
+                        colorFilter = if (selectedItem == index) {
+                            ColorFilter.tint(selectedColor) // Cambia a verde si está seleccionado
+                        } else {
+                            ColorFilter.tint(unselectedColor) // Color original si no está seleccionado
+                        }
+                    )
+                },
+                label = { Text(item.title) },
+                selected = selectedItem == index,
+                colors = NavigationBarItemDefaults.colors(
+                    selectedIconColor = selectedColor,
+                    selectedTextColor = selectedColor,
+                    unselectedIconColor = unselectedColor,
+                    unselectedTextColor = unselectedColor.copy(0.7f)
+                ),
+                onClick = { selectedItem = index }
+            )
+        }
+    }
+}
+
+
+data class BottomNavItem(val title: String, val iconRes: Int)
 
 

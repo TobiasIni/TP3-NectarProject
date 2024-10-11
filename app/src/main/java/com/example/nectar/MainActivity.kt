@@ -79,7 +79,7 @@ fun BotonPrincipal(
         colors = buttonColors(containerColor = color),
         modifier = Modifier.size(width = 350.dp, height = 60.dp)
     ){
-        Text(text = body)
+        Text(text = body , fontSize = 20.sp, color = Color.White)
     }
 
 }
@@ -254,7 +254,15 @@ fun SearchBar() {
 
 
 @Composable
-fun LogIn(){
+@Preview(showBackground = true)
+fun OnBoardScreen() {
+    NectarTheme {
+        OnBoard()
+    }
+}
+
+@Composable
+fun OnBoard() {
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -268,21 +276,59 @@ fun LogIn(){
 
         // Contenido encima del fondo
         Column(
-            modifier = Modifier.align(Alignment.BottomCenter)
+            modifier = Modifier
+                .align(Alignment.BottomCenter)
+                .padding(bottom = 50.dp)  // Ajuste para el espacio con la parte inferior
         ) {
-            Box(modifier = Modifier.padding(50.dp)){
-
-                BotonPrincipal(body = "GetStarted", color = verdePersonalizado , onClick = {})
+            // Icono centrado
+            Box(
+                modifier = Modifier
+                    .padding(bottom = 20.dp)
+                    .align(Alignment.CenterHorizontally)
+            ) {
+                Icon(
+                    painter = painterResource(id = R.drawable.icon_nectar_white),
+                    contentDescription = "Logo Nectar",
+                    modifier = Modifier.size(100.dp),
+                    tint = Color.White
+                )
             }
-            // Agrega más contenido aquí...
+
+            // Título
+            Text(
+                text = "Welcome",
+                fontSize = 50.sp,
+                color = Color.White,
+                modifier = Modifier.align(Alignment.CenterHorizontally)
+            )
+
+            // Subtítulo
+            Text(
+                text = "To our store",
+                fontSize = 50.sp,
+                color = Color.White,
+                modifier = Modifier
+                    .padding(top = 8.dp)
+                    .align(Alignment.CenterHorizontally)
+            )
+
+            // Eslogan
+            Text(
+                text = "Get your groceries in as fast as one hour",
+                fontSize = 14.sp,
+                color = Color.Gray,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier
+                    .padding(top = 4.dp, bottom = 20.dp)
+                    .align(Alignment.CenterHorizontally)
+
+            )
+
+            // Botón principal
+            BotonPrincipal(body = "Get Started", color = verdePersonalizado , onClick = {})
+        }
         }
     }
-}
 
-@Composable
-@Preview(showBackground = true)
-fun OnBoardScreen() {
-    NectarTheme {
-        LogIn()
-    }
-}
+
+

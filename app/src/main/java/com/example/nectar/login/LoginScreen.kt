@@ -46,7 +46,8 @@ import com.example.nectar.verdePersonalizado
 
 @Composable
 fun Login() {
-    Column (modifier = Modifier.fillMaxSize()){
+    Column (modifier = Modifier.fillMaxSize()
+        .padding(top = 100.dp)){
         /*Image(
             painter = painterResource(id = R.drawable.icon_nectar_fullcolor),
             contentDescription = "Login Image",
@@ -79,7 +80,10 @@ fun Login() {
             .align(Alignment.End)
             .padding(top = 10.dp, end = 25.dp))
         Spacer(modifier = Modifier.padding(15.dp))
-        BotonPrincipal(body = "Sign In", color = verdePersonalizado , onClick = {})
+        Box(modifier = Modifier.padding(horizontal = 20.dp)){
+            BotonPrincipal(body = "Sign In", color = verdePersonalizado , onClick = {})
+        }
+
     }
 }
 @Composable

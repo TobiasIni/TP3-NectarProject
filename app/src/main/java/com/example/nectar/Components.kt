@@ -40,6 +40,7 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -55,7 +56,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
+
+import com.example.nectar.navigation.AppNavigation
+import com.example.nectar.navigation.AppScreems
 import com.example.nectar.ui.theme.NectarTheme
+import kotlinx.coroutines.delay
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -63,12 +70,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             NectarTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+                AppNavigation()
             }
         }
     }
@@ -254,21 +256,24 @@ fun SearchBar() {
              imageVector = Icons.Default.Search, contentDescription = "Search Icon")
      }
     ){
-        
+
     }
 }
-
+@Composable
+fun OnBoardPreview(){
+    OnBoard(navController = rememberNavController()) //no navegamos
+}
 
 @Composable
 @Preview(showBackground = true)
 fun OnBoardScreen() {
     NectarTheme {
-        OnBoard()
+        OnBoardPreview()
     }
 }
 
 @Composable
-fun OnBoard() {
+fun OnBoard(navController: NavHostController) {
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -331,7 +336,7 @@ fun OnBoard() {
             )
 
             // Botón principal
-            BotonPrincipal(body = "Get Started", color = verdePersonalizado , onClick = {})
+            BotonPrincipal(body = "Get Started", color = verdePersonalizado , onClick = {navController.navigate(AppScreems.SignInScreen.route)})
         }
         }
 
@@ -458,7 +463,13 @@ fun PreviewThemeSwitcher() {
 
 
 @Composable
-fun SplashScreen(){
+fun SplashScreen(navController:NavHostController){
+    LaunchedEffect(key1 = true) {
+        delay(3000)
+        navController.popBackStack() //no deja volver atras al splash
+        navController.navigate(AppScreems.OnBoard.route)
+    }
+
     Splash()
 }
 
@@ -468,7 +479,7 @@ fun Splash(){
     Column (
         modifier = Modifier
             .fillMaxSize()
-            .background (Color(0xFF53B175)),
+            .background(Color(0xFF53B175)),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement =  Arrangement.Center
     ){
@@ -496,6 +507,7 @@ fun Splash(){
 @Preview(showBackground=true)
 @Composable
 fun SplashScreenPreview(){
+
     Splash()
 }
 @OptIn(ExperimentalMaterial3Api::class)

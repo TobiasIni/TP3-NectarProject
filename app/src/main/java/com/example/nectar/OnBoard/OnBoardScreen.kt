@@ -28,11 +28,10 @@ fun OnBoard() {
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
-        // Imagen de fondo desde una URL
         Image(
-            painter = painterResource(id = R.drawable.img_onboard),  // Reemplaza con tu imagen
+            painter = painterResource(id = R.drawable.img_onboard),
             contentDescription = "Background Image",
-            contentScale = ContentScale.Crop,  // Ajusta para llenar todo el fondo
+            contentScale = ContentScale.Crop,
             modifier = Modifier.fillMaxSize()
                 .size(200.dp)
 

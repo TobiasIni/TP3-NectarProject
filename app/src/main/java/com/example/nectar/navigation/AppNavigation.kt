@@ -21,12 +21,20 @@ fun AppNavigation() {
         composable(AppScreens.OnBoard.route) {
             OnBoard(navController)  // Aquí pasas el navController
         }
+<<<<<<< Updated upstream
 
         composable(AppScreens.SignInScreen.route) {
             Login()  // Esta es la pantalla de SignIn
         }
         composable(AppScreens.MainScreen.route) {
             Login()
+=======
+        composable(AppScreems.SignInScreen.route) {
+            Login(navController)  // Esta es la pantalla de SignIn
+        }
+        composable(AppScreems.MainScreen.route) {
+            Login(navController)
+>>>>>>> Stashed changes
         }
         composable(AppScreens.SignInScreen.route) {
             MainScreen()  // Esta es la pantalla de SignIn

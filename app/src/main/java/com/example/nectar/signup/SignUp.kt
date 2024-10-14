@@ -27,7 +27,7 @@ import androidx.compose.ui.unit.sp
 import com.example.nectar.BotonPrincipal
 import com.example.nectar.R
 import com.example.nectar.ui.theme.NectarTheme
-import com.example.nectar.verdePersonalizado
+import com.example.nectar.ui.theme.verdePersonalizado
 
 
 @Composable

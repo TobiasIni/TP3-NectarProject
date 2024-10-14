@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -32,7 +33,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemDefaults
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -60,8 +60,10 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 
 import com.example.nectar.navigation.AppNavigation
-import com.example.nectar.navigation.AppScreems
+import com.example.nectar.navigation.AppScreens
 import com.example.nectar.ui.theme.NectarTheme
+import com.example.nectar.ui.theme.lightGrayColor
+import com.example.nectar.ui.theme.verde
 import kotlinx.coroutines.delay
 
 class MainActivity : ComponentActivity() {
@@ -75,7 +77,6 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
-val verdePersonalizado = Color(0xFF00B36F)
 
 @Composable
 fun BotonPrincipal(
@@ -104,7 +105,6 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 fun addItem() {
     // Estado para almacenar el valor del Int
     var quantity by remember { mutableStateOf(0) }
-    val verdePersonalizado = Color(0xFF00B36F)
 
     Spacer(modifier = Modifier.padding(25.dp))
     Row(
@@ -119,7 +119,7 @@ fun addItem() {
                 if (quantity > 0) quantity-- // Decrementar el valor
             }
         , colors = buttonColors(
-                containerColor = verdePersonalizado,
+                containerColor = verde,
                 contentColor = Color.White
             )
         ) {
@@ -143,7 +143,7 @@ fun addItem() {
                 quantity++ // Incrementar el valor
             },
         colors = buttonColors(
-                containerColor = verdePersonalizado,
+                containerColor = verde,
                 contentColor = Color.White
             )
         ) {
@@ -336,7 +336,7 @@ fun OnBoard(navController: NavHostController) {
             )
 
             // Botón principal
-            BotonPrincipal(body = "Get Started", color = verdePersonalizado , onClick = {navController.navigate(AppScreems.SignInScreen.route)})
+            BotonPrincipal(body = "Get Started", color = verde , onClick = {navController.navigate(AppScreens.SignInScreen.route)})
         }
         }
 
@@ -467,7 +467,7 @@ fun SplashScreen(navController:NavHostController){
     LaunchedEffect(key1 = true) {
         delay(3000)
         navController.popBackStack() //no deja volver atras al splash
-        navController.navigate(AppScreems.OnBoard.route)
+        navController.navigate(AppScreens.OnBoard.route)
     }
 
     Splash()
@@ -549,7 +549,8 @@ fun BottomNavigationBar() {
 
     NavigationBar(
         containerColor = Color.White,
-        contentColor = Color.Black
+        contentColor = Color.Black,
+        modifier = Modifier.border(1.dp, color = lightGrayColor)
     ) {
         items.forEachIndexed { index, item ->
             NavigationBarItem(
@@ -580,5 +581,12 @@ fun BottomNavigationBar() {
 
 
 data class BottomNavItem(val title: String, val iconRes: Int)
+
+@Preview
+@Composable
+fun BottomNavBarPreview(){
+    BottomNavigationBar()
+}
+
 
 

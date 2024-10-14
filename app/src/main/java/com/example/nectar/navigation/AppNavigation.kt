@@ -6,24 +6,41 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.nectar.OnBoard
 import com.example.nectar.SplashScreen
+<<<<<<< Updated upstream
 import com.example.nectar.singin.Login
+
+=======
+import com.example.nectar.home.HomeScreen
+import com.example.nectar.singin.MainScreen
+>>>>>>> Stashed changes
 
 
 @Composable
 fun AppNavigation() {
     val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = AppScreems.SplashScreen.route) {
-        composable(AppScreems.SplashScreen.route) {
+    NavHost(navController = navController, startDestination = AppScreens.SplashScreen.route) {
+        composable(AppScreens.SplashScreen.route) {
             SplashScreen(navController)
         }
-        composable(AppScreems.OnBoard.route) {
+        composable(AppScreens.OnBoard.route) {
             OnBoard(navController)  // Aquí pasas el navController
         }
+<<<<<<< Updated upstream
         composable(AppScreems.SignInScreen.route) {
             Login()  // Esta es la pantalla de SignIn
         }
         composable(AppScreems.MainScreen.route) {
             Login()
+=======
+        composable(AppScreens.SignInScreen.route) {
+            MainScreen()  // Esta es la pantalla de SignIn
+        }
+        composable(AppScreens.MainScreen.route) {
+            MainScreen()
+>>>>>>> Stashed changes
+        }
+        composable(AppScreens.HomeScreen.route){
+            HomeScreen()
         }
     }
 }

@@ -40,7 +40,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.nectar.BotonPrincipal
 import com.example.nectar.R
 import com.example.nectar.ui.theme.NectarTheme
-import com.example.nectar.verdePersonalizado
+import com.example.nectar.ui.theme.VerdePersonalizado
 
 
 @Composable
@@ -112,7 +112,7 @@ fun Login(navController: NavController) {
         Box(modifier = Modifier.padding(horizontal = 20.dp)) {
             BotonPrincipal(
                 body = "Sign In",
-                color = verdePersonalizado,
+                color = VerdePersonalizado,
                 onClick = {
                     // Lógica de inicio de sesión
                 }
@@ -133,7 +133,7 @@ fun Login(navController: NavController) {
             Spacer(modifier = Modifier.width(4.dp))
             Text(
                 text = "Sign Up",
-                color = verdePersonalizado, // Color personalizado
+                color = VerdePersonalizado, // Color personalizado
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.clickable {
                     // Navegar a la pantalla de registro

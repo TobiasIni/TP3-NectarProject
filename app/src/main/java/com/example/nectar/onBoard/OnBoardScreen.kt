@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.sp
 import com.example.nectar.BotonPrincipal
 import com.example.nectar.R
 import com.example.nectar.ui.theme.NectarTheme
-import com.example.nectar.ui.theme.verdePersonalizado
+import com.example.nectar.ui.theme.VerdePersonalizado
 
 @Composable
 fun OnBoard() {
@@ -88,7 +88,7 @@ fun OnBoard() {
             )
 
             // Botón principal
-            BotonPrincipal(body = "Get Started", color = verdePersonalizado , onClick = {})
+            BotonPrincipal(body = "Get Started", color = VerdePersonalizado , onClick = {})
         }
     }
 }

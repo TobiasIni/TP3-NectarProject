@@ -15,9 +15,11 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
@@ -53,15 +55,19 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.window.Dialog
+import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 
 import com.example.nectar.navigation.AppNavigation
-import com.example.nectar.navigation.AppScreens
+import com.example.nectar.navigation.AppScreems
 import com.example.nectar.ui.theme.NectarTheme
+import com.example.nectar.ui.theme.VerdePersonalizado
 import com.example.nectar.ui.theme.lightGrayColor
 import com.example.nectar.ui.theme.verde
 import kotlinx.coroutines.delay
@@ -88,7 +94,7 @@ fun BotonPrincipal(
         colors = buttonColors(containerColor = color),
         modifier = Modifier.size(width = 350.dp, height = 60.dp)
     ){
-        Text(text = body , fontSize = 20.sp, color = Color.White)
+        Text(text = body , fontSize = 16.sp, color = Color.White)
     }
 
 }
@@ -336,18 +342,29 @@ fun OnBoard(navController: NavHostController) {
             )
 
             // Botón principal
-            BotonPrincipal(body = "Get Started", color = verde , onClick = {navController.navigate(AppScreens.SignInScreen.route)})
+            BotonPrincipal(body = "Get Started", color = verde , onClick = {navController.navigate(
+                AppScreems.SignInScreen.route)})
         }
         }
 
     }
+
+@Preview(showBackground = true)
 @Composable
-fun SuccessScreen(modifier: Modifier = Modifier) {
+fun SuccessScreenPreview() {
+    // Simulamos un NavController
+    val mockNavController = rememberNavController()
+
+
+    SuccessScreen(navController = mockNavController)
+}
+@Composable
+fun SuccessScreen(navController: NavController, modifier: Modifier = Modifier) {
     Surface(modifier = modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(16.dp), // Añadir padding general
+                .padding(16.dp),
             verticalArrangement = Arrangement.SpaceBetween,
             horizontalAlignment = Alignment.CenterHorizontally // Centra horizontalmente todo el contenido
         ) {
@@ -366,44 +383,49 @@ fun SuccessScreen(modifier: Modifier = Modifier) {
                 style = MaterialTheme.typography.headlineMedium,
                 modifier = Modifier
                     .padding(bottom = 10.dp)
-                    .align(Alignment.CenterHorizontally) // Alinea el texto en el centro
+                    .fillMaxWidth(), // Asegúrate de que el texto ocupe todo el ancho disponible
+                textAlign = TextAlign.Center // Alinea el texto en el centro
+            )
 
-            )
+            // Texto adicional centrado
             Text(
-                text="Your items has been placed and is on \n" +
-                        "it’s way to being processed",
+                text = "Your items have been placed and are on \n" +
+                        "their way to being processed",
                 style = MaterialTheme.typography.labelSmall,
-                color= Color.Gray
+                color = Color.Gray,
+                textAlign = TextAlign.Center, // Asegura que el texto se centre
+                modifier = Modifier
+                    .align(Alignment.CenterHorizontally) // Alinea el texto en el centro
+                    .fillMaxWidth()
             )
+
+            Spacer(modifier = Modifier.weight(1f)) //empuja botones abajo
 
             // Botones uno encima del otro
             Column(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                // Botón "Track Order"
-                Button(
-                    onClick = { /* Acción para track order */ },
-                    colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF53B175)),
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(bottom = 10.dp) // Separación entre los botones
-                ) {
-                    Text(text = "Track Order", color = Color.White)
-                }
+                // Botón "Track Order" reutilizando BotonPrincipal
+                BotonPrincipal(
+                    body = "Track Order",
+                    color = VerdePersonalizado,
+                    onClick = { /* Acción para track order */ }
+                )
 
-                // Botón "Back to Home"
-                Button(
-                    onClick = { /* Acción para back to home */ },
-                    colors = ButtonDefaults.buttonColors(containerColor = Color.White),
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    Text(text = "Back to Home", color = Color.Black)
-                }
+                Spacer(modifier = Modifier.height(16.dp)) // Espacio entre los botones
+
+                // Botón "Back to Home" reutilizando el botón de popup error
+                BotonPrincipal(
+                    body = "Back to Home",
+                    color = Color.White,
+                    onClick = { navController.navigate(AppScreems.HomeScreen.route) }
+                )
             }
         }
     }
 }
+
 
 @Composable
 fun ThemeSwitcher() {
@@ -467,7 +489,7 @@ fun SplashScreen(navController:NavHostController){
     LaunchedEffect(key1 = true) {
         delay(3000)
         navController.popBackStack() //no deja volver atras al splash
-        navController.navigate(AppScreens.OnBoard.route)
+        navController.navigate(AppScreems.OnBoard.route)
     }
 
     Splash()
@@ -580,6 +602,7 @@ fun BottomNavigationBar() {
 }
 
 
+
 data class BottomNavItem(val title: String, val iconRes: Int)
 
 @Preview
@@ -587,6 +610,102 @@ data class BottomNavItem(val title: String, val iconRes: Int)
 fun BottomNavBarPreview(){
     BottomNavigationBar()
 }
+
+@Composable
+fun PopupError(navController: NavController) {
+    var showDialog by remember { mutableStateOf(true) }
+
+    if (showDialog) {
+        Dialog(onDismissRequest = { showDialog = false }) {
+            Box(
+                modifier = Modifier
+                    .size(350.dp)
+                    .background(Color.White, shape = RoundedCornerShape(16.dp))
+                    .padding(16.dp)
+            ) {
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    // Botón de cerrar en la esquina superior izquierda
+                    IconButton(
+                        onClick = { showDialog = false },
+                        modifier = Modifier.align(Alignment.Start)
+                    ) {
+                        Image(
+                            painter = painterResource(id = R.drawable.icon_close),
+                            contentDescription = "Close",
+                            modifier = Modifier.size(14.dp)
+                        )
+
+                    }
+
+                    // Imagen superior (la bolsa de compra)
+                    Image(
+                        painter = painterResource(id = R.drawable.shopping_bag),
+                        contentDescription = "Bag",
+                        modifier = Modifier.size(120.dp),
+                        contentScale = ContentScale.Fit
+                    )
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    Text(text = "Oops! Order Failed", fontSize = 18.sp, color = Color.Black)
+
+
+
+                    Text(
+                        text = "Something went terribly wrong.",
+                        style = MaterialTheme.typography.labelSmall,
+                        color = Color.Gray
+                    )
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    // Botón "Please try again"
+                    BotonPrincipal(
+                        body = "Please try again",
+                        color = VerdePersonalizado,
+                        onClick = { navController.navigate(AppScreems.HomeScreen.route) }
+                    )
+
+                    Spacer(modifier = Modifier.height(14.dp))
+
+                    // Botón "Back to Home"
+                    Button(
+                        onClick = { navController.navigate(AppScreems.HomeScreen.route) },
+                        colors = ButtonDefaults.buttonColors(containerColor = Color.White),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(60.dp)
+                    ) {
+                        Text(text = "Back to Home", color = Color.Black, fontSize = 16.sp)
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+
+
+@Preview(showBackground = true)
+@Composable
+fun PopupErrorPreview() {
+    // Simulamos un NavController
+    val mockNavController = rememberNavController()
+
+    // Pasamos el controlador simulado a PopupError
+    PopupError(navController = mockNavController)
+}
+
+
+
+
+
+
+
 
 
 

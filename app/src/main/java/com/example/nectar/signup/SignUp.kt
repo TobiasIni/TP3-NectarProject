@@ -27,8 +27,7 @@ import androidx.compose.ui.unit.sp
 import com.example.nectar.BotonPrincipal
 import com.example.nectar.R
 import com.example.nectar.ui.theme.NectarTheme
-import com.example.nectar.ui.theme.verdePersonalizado
-
+import com.example.nectar.ui.theme.VerdePersonalizado
 
 @Composable
 @Preview(showBackground = true)
@@ -81,7 +80,7 @@ fun Login() {
         )
         Spacer(modifier = Modifier.padding(15.dp))
         Box(modifier = Modifier.align(Alignment.CenterHorizontally)){
-            BotonPrincipal(body = "Sign Up", color = verdePersonalizado , onClick = {})
+            BotonPrincipal(body = "Sign Up", color = VerdePersonalizado, onClick = {})
             }
         Text(
             text = "Already have an account? SignUp",

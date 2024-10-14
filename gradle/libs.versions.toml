@@ -12,6 +12,7 @@ coreSplashscreen = "1.0.1"
 navigationCompose = "2.8.2"
 navigationRuntimeKtx = "2.8.2"
 playServicesAnalyticsImpl = "18.1.0"
+navigationTesting = "2.8.2"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -32,6 +33,7 @@ androidx-core-splashscreen = { group = "androidx.core", name = "core-splashscree
 androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationCompose" }
 androidx-navigation-runtime-ktx = { group = "androidx.navigation", name = "navigation-runtime-ktx", version.ref = "navigationRuntimeKtx" }
 play-services-analytics-impl = { group = "com.google.android.gms", name = "play-services-analytics-impl", version.ref = "playServicesAnalyticsImpl" }
+androidx-navigation-testing = { group = "androidx.navigation", name = "navigation-testing", version.ref = "navigationTesting" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

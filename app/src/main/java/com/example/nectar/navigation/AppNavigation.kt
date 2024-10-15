@@ -9,45 +9,27 @@ import com.example.nectar.SplashScreen
 import com.example.nectar.detail.DetailScreen
 import com.example.nectar.singin.Login
 import com.example.nectar.home.HomeScreen
-import com.example.nectar.navigation.AppScreems.MainScreen
-
+import com.example.nectar.navigation.AppScreems
 
 @Composable
 fun AppNavigation() {
     val navController = rememberNavController()
+
     NavHost(navController = navController, startDestination = AppScreems.SplashScreen.route) {
         composable(AppScreems.SplashScreen.route) {
             SplashScreen(navController)
         }
         composable(AppScreems.OnBoard.route) {
-            OnBoard(navController)  // Aquí pasas el navController
+            OnBoard(navController)
         }
-
         composable(AppScreems.SignInScreen.route) {
-            Login(navController)  // Esta es la pantalla de SignIn
-        }
-        composable(AppScreems.MainScreen.route) {
             Login(navController)
-
-            composable(AppScreems.SignInScreen.route) {
-                Login(navController)  // Esta es la pantalla de SignIn
-            }
-            composable(AppScreems.MainScreen.route) {
-                Login(navController)
-
-            }
-            composable(AppScreems.SignInScreen.route) {
-                MainScreen  // Esta es la pantalla de SignIn
-            }
-            composable(AppScreems.MainScreen.route) {
-                MainScreen
-            }
-            composable(AppScreems.HomeScreen.route) {
-                HomeScreen(navController)
-            }
-            composable (AppScreems.DetailsScreen.route){
-                DetailScreen()
-            }
+        }
+        composable(AppScreems.HomeScreen.route) {
+            HomeScreen(navController)
+        }
+        composable(AppScreems.DetailsScreen.route) {
+            DetailScreen(navController)  // Asegúrate de que DetailScreen reciba navController
         }
     }
 }

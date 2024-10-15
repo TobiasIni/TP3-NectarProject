@@ -24,8 +24,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.nectar.BotonPrincipal
 import com.example.nectar.R
+import com.example.nectar.navigation.AppScreems
 import com.example.nectar.ui.theme.NectarTheme
 import com.example.nectar.ui.theme.VerdePersonalizado
 
@@ -33,14 +36,16 @@ import com.example.nectar.ui.theme.VerdePersonalizado
 @Preview(showBackground = true)
     fun LoginPreview() {
         NectarTheme {
-            Login()
+            val navController = rememberNavController()
+            Login(navController = navController)
         }
 
     }
 
 @Composable
-fun Login() {
-    Column (modifier = Modifier.fillMaxSize()
+fun Login(navController: NavController) {
+    Column (modifier = Modifier
+        .fillMaxSize()
         .padding(top = 100.dp)){
         /*Image(
             painter = painterResource(id = R.drawable.icon_nectar_fullcolor),
@@ -80,7 +85,8 @@ fun Login() {
         )
         Spacer(modifier = Modifier.padding(15.dp))
         Box(modifier = Modifier.align(Alignment.CenterHorizontally)){
-            BotonPrincipal(body = "Sign Up", color = VerdePersonalizado, onClick = {})
+            BotonPrincipal(body = "Sign Up", color = VerdePersonalizado, onClick = {navController.navigate(
+                AppScreems.HomeScreen.route)})
             }
         Text(
             text = "Already have an account? SignUp",

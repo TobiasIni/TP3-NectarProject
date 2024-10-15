@@ -19,6 +19,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
@@ -112,20 +113,21 @@ fun addItem() {
     // Estado para almacenar el valor del Int
     var quantity by remember { mutableStateOf(0) }
 
-    Spacer(modifier = Modifier.padding(25.dp))
+
+    // Row que ajusta su tamaño al contenido
     Row(
         modifier = Modifier
-            .fillMaxWidth(),
-        horizontalArrangement = Arrangement.Start, // Centra los elementos en la fila
+            .wrapContentWidth(), // Ajusta el ancho a los componentes hijos
+        horizontalArrangement = Arrangement.Start, // Alinea los elementos al inicio
         verticalAlignment = Alignment.CenterVertically
     ) {
         // Botón "-"
         Button(
             onClick = {
                 if (quantity > 0) quantity-- // Decrementar el valor
-            }
-        , colors = buttonColors(
-                containerColor = verde,
+            },
+            colors = ButtonDefaults.buttonColors(
+                containerColor = verde, // Cambia por tu color definido
                 contentColor = Color.White
             )
         ) {
@@ -148,8 +150,8 @@ fun addItem() {
             onClick = {
                 quantity++ // Incrementar el valor
             },
-        colors = buttonColors(
-                containerColor = verde,
+            colors = ButtonDefaults.buttonColors(
+                containerColor = verde, // Cambia por tu color definido
                 contentColor = Color.White
             )
         ) {
@@ -157,6 +159,7 @@ fun addItem() {
         }
     }
 }
+
 
 @Composable
 fun ExpandableText(

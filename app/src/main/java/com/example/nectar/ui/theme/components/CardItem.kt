@@ -35,15 +35,20 @@ import com.example.nectar.navigation.AppScreems
 import com.example.nectar.ui.theme.lightGrayColor
 import com.example.nectar.ui.theme.verde
 
-data class Product(val imageRes: Int, val name: String, val details: String, val price: String)
+data class Product(val imageRes: Int, val name: String, val categoria: String, val details: String, val price: Int)
 
 val sampleProducts = listOf(
-    Product(R.drawable.banana, "Bananas", "1 kg.", "$2.000"),
-    Product(R.drawable.apples, "Manzana dulce", "1 kg.", "$1.800"),
-    Product(R.drawable.banana, "Frutillas", "1 kg.", "$2.500")
+    Product(R.drawable.banana, "Bananas", "Verduleria", "1 kg.", 2000),
+    Product(R.drawable.apples, "Manzana dulce", "Verduleria", "1 kg.", 1800),
+    Product(R.drawable.frutillas, "Frutillas", "Verduleria", "1 kg.", 2500),
+    Product(R.drawable.lentejas, "Lentejas", "Almacen", "1 kg.", 2500),
+    Product(R.drawable.servilletas, "Servilletas", "Limpieza", "1 kg.", 2500),
+    Product(R.drawable.uvas, "Uvas", "Verduleria","1 kg.", 2500),
+    Product(R.drawable.uvas, "Uvas", "Verduleria","1 kg.", 2500),
+    Product(R.drawable.uvas, "Uvas", "Verduleria","1 kg.", 2500)
 )
 
-val product = Product(R.drawable.banana, "Bananas", "1 kg.", "$2.000")
+val product = Product(R.drawable.banana, "Bananas", "Verduleria","1 kg.", 2000)
 
 @Composable
 fun ProductCard(product: Product, navController: NavController, modifier: Modifier = Modifier) {
@@ -90,7 +95,7 @@ fun ProductCard(product: Product, navController: NavController, modifier: Modifi
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = product.price,
+                    text = "$${product.price}",
                     fontSize = 16.sp,
                     fontWeight = FontWeight.Bold
                 )

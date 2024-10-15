@@ -545,7 +545,7 @@ fun CustomTopBar(title: String) {
                 Icon(Icons.Default.Menu, contentDescription = "Menu")
             }
         },
-        colors = TopAppBarDefaults.smallTopAppBarColors(containerColor = Color.White),
+        colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.White),
 
         )
 }
@@ -575,7 +575,9 @@ fun BottomNavigationBar() {
     NavigationBar(
         containerColor = Color.White,
         contentColor = Color.Black,
-        modifier = Modifier.border(1.dp, color = lightGrayColor)
+        modifier = Modifier
+            .border(1.dp, color = lightGrayColor)
+            .fillMaxWidth()
     ) {
         items.forEachIndexed { index, item ->
             NavigationBarItem(

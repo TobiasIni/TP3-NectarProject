@@ -22,6 +22,8 @@ import com.example.nectar.BotonPrincipal
 import com.example.nectar.R
 import com.example.nectar.ui.theme.NectarTheme
 import com.example.nectar.ui.theme.VerdePersonalizado
+import com.example.nectar.ui.theme.lightGrayColor
+import com.example.nectar.ui.theme.verde
 
 @Composable
 fun OnBoard() {
@@ -79,7 +81,7 @@ fun OnBoard() {
             Text(
                 text = "Get your groceries in as fast as one hour",
                 fontSize = 14.sp,
-                color = Color.Gray,
+                color = lightGrayColor,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier
                     .padding(top = 4.dp, bottom = 20.dp)
@@ -88,7 +90,7 @@ fun OnBoard() {
             )
 
             // Botón principal
-            BotonPrincipal(body = "Get Started", color = VerdePersonalizado , onClick = {})
+            BotonPrincipal(body = "Get Started", color = verde , onClick = {})
         }
     }
 }

@@ -4,89 +4,115 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Menu
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.Surface
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.example.nectar.BottomNavigationBar
+import androidx.navigation.NavController
+import com.example.nectar.BottomNavBarPreview
 import com.example.nectar.R
 import com.example.nectar.ui.theme.NectarTheme
 import com.example.nectar.ui.theme.components.Product
 import com.example.nectar.ui.theme.components.ProductCard
+import com.example.nectar.ui.theme.components.TopAppBar
 import com.example.nectar.ui.theme.components.sampleProducts
 import androidx.compose.foundation.Image as Image
 
 
 @Composable
 fun HomeScreen(navController: NavController) {
-    Surface {
-        NectarTheme {
-            Column(
+    NectarTheme {
+        Scaffold (
+            topBar = { TopAppBar("Shop") },
+            bottomBar = { BottomNavBarPreview() }
+        ){  paddingValues ->
+            LazyColumn (
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(16.dp)
+                    .padding(paddingValues)
             ) {
-                TopAppBar()
-                LocationBar()
-                CarouselBanner()
-                ProductSection(
-                    title = "Exclusive Offer",
-                    products = sampleProducts,
-                    navController = navController
-                )
-                ProductSection(
-                    title = "Best Selling",
-                    products = sampleProducts,
-                    navController = navController
-                )
-                Spacer(modifier = Modifier.weight(1f))
-                BottomNavigationBar()
+                item {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxSize()
+                    ) {
+                        Column(
+                            modifier = Modifier
+                                .padding(10.dp,0.dp,10.dp,10.dp) // Deja espacio para la barra de navegación
+                        ) {
+                            LocationBar()
+                            CarouselBanner()
+                            ProductSection(
+                                title = "Exclusive Offer",
+                                products = sampleProducts,
+                                navController = navController
+                            )
+                            ProductSection(
+                                title = "Best Selling",
+                                products = sampleProducts,
+                                navController = navController
+                            )
+                            ProductSection(
+                                title = "Almacén",
+                                products = sampleProducts,
+                                navController = navController
+                            )
+                            ProductSection(
+                                title = "Verdulería",
+                                products = sampleProducts,
+                                navController = navController
+                            )
+                        }
+
+                    }
+                }
             }
         }
     }
 }
-
+/*
 @Composable
-fun TopAppBar() {
+fun TopAppBar(title: String) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 8.dp),
+            .padding(0.dp, 40.dp, 10.dp, 0.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
         IconButton(onClick = {  }) {
             Icon(
                 imageVector = Icons.Default.Menu,
-                contentDescription = "Menu"
+                contentDescription = "Menu",
+                //modifier = Modifier.padding(8.dp, 8.dp, 20.dp, 8.dp)
             )
         }
-        Text(text = "Shop", fontSize = 20.sp, fontWeight = FontWeight.Bold)
+        Text(
+            text = title,
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier
+                .padding(0.dp, 8.dp, 20.dp, 8.dp)
+        )
     }
-}
+}*/
 
 @Composable
 fun LocationBar() {
@@ -94,7 +120,7 @@ fun LocationBar() {
         text = "Dhaka, Banassre",
         fontSize = 16.sp,
         color = Color.Gray,
-        modifier = Modifier.padding(vertical = 8.dp)
+        modifier = Modifier.padding(0.dp,15.dp,8.dp,0.dp)
     )
 }
 
@@ -141,7 +167,8 @@ fun ProductSection(title: String, products: List<Product>, navController: NavCon
             modifier = Modifier.padding(vertical = 8.dp)
         ) {
             items(products) { product ->
-                ProductCard(navController = navController,
+                ProductCard(
+                    navController = navController,
                     product = product,
                     modifier = Modifier
                         .width(180.dp) // Ajusta el ancho de cada tarjeta de producto
@@ -151,6 +178,16 @@ fun ProductSection(title: String, products: List<Product>, navController: NavCon
         }
     }
 }
+/*
+@Preview(showBackground = true)
+@Composable
+fun BottomNavigationBarPreview() {
+    Row (
+        verticalAlignment = Alignment.Bottom
+    ) {
+        BottomNavigationBar()
+    }
+}*/
 
 @Preview(showBackground = true)
 @Composable

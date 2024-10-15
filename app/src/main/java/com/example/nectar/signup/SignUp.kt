@@ -40,13 +40,13 @@ import com.example.nectar.ui.theme.VerdePersonalizado
     fun LoginPreview() {
         NectarTheme {
             val navController = rememberNavController()
-            Login(navController = navController)
+            SignUp(navController = navController)
         }
 
     }
 
 @Composable
-fun Login(navController: NavController) {
+fun SignUp(navController: NavController) {
     Column (modifier = Modifier
         .fillMaxSize()
         .padding(top = 100.dp)){

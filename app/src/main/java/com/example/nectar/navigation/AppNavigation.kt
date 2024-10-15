@@ -13,7 +13,7 @@ import com.example.nectar.favorite.ProductScreen
 import com.example.nectar.singin.Login
 import com.example.nectar.home.HomeScreen
 import com.example.nectar.location.LocationScreen
-
+import com.example.nectar.signup.SignUp
 
 @Composable
 fun AppNavigation() {
@@ -35,16 +35,21 @@ fun AppNavigation() {
         composable(AppScreems.DetailsScreen.route) {
             DetailScreen(navController)
         }
-        composable (AppScreems.selectLocationScreen.route){
+        composable(AppScreems.selectLocationScreen.route) {
             LocationScreen(navController)
         }
-        composable(AppScreems.CartScreen.route){
-            CartScreen()
+        composable(AppScreems.CartScreen.route) {
+            CartScreen(navController) // Aquí pasamos navController
         }
-        composable(AppScreems.FavoriteScreen.route){
+        composable(AppScreems.FavoriteScreen.route) {
             ProductScreen(navController)
         }
         composable(AppScreems.ExploreScreen.route) {
-            Explore(navController) }
+            Explore(navController)
+        }
+        composable(AppScreems.SignUp.route) {
+            SignUp(navController)
+        }
+
     }
 }

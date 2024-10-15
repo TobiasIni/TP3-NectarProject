@@ -1,6 +1,5 @@
 package com.example.nectar.navigation
 
-
 sealed class AppScreems(val route: String) {
     object SplashScreen : AppScreems("splash_screen")
     object OnBoard : AppScreems("onboard_screen")
@@ -12,6 +11,6 @@ sealed class AppScreems(val route: String) {
     object DetailsScreen : AppScreems("details_screen")
     object SignUp : AppScreems("signup_screen")
     object selectLocationScreen : AppScreems("selectLocation_screen")
-    object FavoriteScreen :AppScreems("favorite_screen")
-    object ExploreScreen : AppScreems("explore")
+    object FavoriteScreen : AppScreems("favorite_screen")
+    object ExploreScreen : AppScreems("explore_screen") // Cambié a "explore_screen" por consistencia
 }

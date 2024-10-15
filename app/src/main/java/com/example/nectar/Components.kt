@@ -478,7 +478,7 @@ fun BottomNavigationBar(navController: NavController) {
                     selectedItem = index
                     when (index) {
                         0 -> navController.navigate(AppScreems.HomeScreen.route) // Navegar a la pantalla de Shop
-                       // 1 -> navController.navigate(AppScreems.ExploreScreen.route) // Navegar a la pantalla de Explore
+                        1 -> navController.navigate(AppScreems.ExploreScreen.route) // Navegar a la pantalla de Explore
                         2 -> navController.navigate(AppScreems.CartScreen.route) // Navegar a la pantalla de Cart
                         3 -> navController.navigate(AppScreems.FavoriteScreen.route) // Navegar a la pantalla de Favourite
                         4 -> navController.navigate(AppScreems.AccountScreen.route) // Navegar a la pantalla de Account

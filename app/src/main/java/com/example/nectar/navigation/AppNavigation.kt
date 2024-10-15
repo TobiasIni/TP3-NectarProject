@@ -8,6 +8,7 @@ import com.example.nectar.OnBoard
 import com.example.nectar.SplashScreem.SplashScreen
 import com.example.nectar.cart.CartScreen
 import com.example.nectar.detail.DetailScreen
+import com.example.nectar.explore.Explore
 import com.example.nectar.favorite.ProductScreen
 import com.example.nectar.singin.Login
 import com.example.nectar.home.HomeScreen
@@ -32,7 +33,7 @@ fun AppNavigation() {
             HomeScreen(navController)
         }
         composable(AppScreems.DetailsScreen.route) {
-            DetailScreen(navController)  // Asegúrate de que DetailScreen reciba navController
+            DetailScreen(navController)
         }
         composable (AppScreems.selectLocationScreen.route){
             LocationScreen(navController)
@@ -43,5 +44,7 @@ fun AppNavigation() {
         composable(AppScreems.FavoriteScreen.route){
             ProductScreen(navController)
         }
+        composable(AppScreems.ExploreScreen.route) {
+            Explore(navController) }
     }
 }

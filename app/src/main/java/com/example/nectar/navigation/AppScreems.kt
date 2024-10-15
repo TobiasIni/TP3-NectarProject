@@ -13,4 +13,5 @@ sealed class AppScreems(val route: String) {
     object SignUp : AppScreems("signup_screen")
     object selectLocationScreen : AppScreems("selectLocation_screen")
     object FavoriteScreen :AppScreems("favorite_screen")
+    object ExploreScreen : AppScreems("explore")
 }

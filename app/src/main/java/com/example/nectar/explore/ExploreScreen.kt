@@ -47,7 +47,7 @@ fun Explore(navController: NavController) {
         }
         Spacer(modifier = Modifier.size(4.dp))
         Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.BottomCenter) {
-            BottomNavigationBar()
+            BottomNavigationBar(navController)
         }
     }
 }

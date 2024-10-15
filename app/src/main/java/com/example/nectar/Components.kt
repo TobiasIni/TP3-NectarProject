@@ -486,55 +486,6 @@ fun PreviewThemeSwitcher() {
     ThemeSwitcher()
 }
 
-
-@Composable
-fun SplashScreen(navController:NavHostController){
-    LaunchedEffect(key1 = true) {
-        delay(3000)
-        navController.popBackStack() //no deja volver atras al splash
-        navController.navigate(AppScreems.OnBoard.route)
-    }
-
-    Splash()
-}
-
-@Composable
-fun Splash(){
-
-    Column (
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color(0xFF53B175)),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement =  Arrangement.Center
-    ){
-        val icon: Painter = painterResource(id = R.drawable.icon_nectar)
-        Image(
-            painter = icon,
-            contentDescription = "Logo Nectar", // Descripción para accesibilidad
-            modifier = Modifier
-                .size(150.dp,100.dp),
-            colorFilter = ColorFilter.tint(Color.White)
-        )// Ajusta el tamaño del icono si es necesario
-
-        Text(
-            "online groceriet",
-            fontSize =10.sp,
-            fontWeight=FontWeight.Bold,
-            color = Color.White
-
-        )
-    }
-
-
-}
-
-@Preview(showBackground=true)
-@Composable
-fun SplashScreenPreview(){
-
-    Splash()
-}
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CustomTopBar(title: String) {

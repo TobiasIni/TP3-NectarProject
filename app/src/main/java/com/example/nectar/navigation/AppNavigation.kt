@@ -5,7 +5,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.nectar.OnBoard
-import com.example.nectar.SplashScreen
+import com.example.nectar.SplashScreem.SplashScreen
 import com.example.nectar.detail.DetailScreen
 import com.example.nectar.singin.Login
 import com.example.nectar.home.HomeScreen

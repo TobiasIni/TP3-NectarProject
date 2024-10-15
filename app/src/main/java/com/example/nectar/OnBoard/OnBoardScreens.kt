@@ -94,7 +94,7 @@ fun OnBoard() {
 }
 @Composable
 @Preview(showBackground = true)
-fun OnBoardScreen() {
+fun OnBoardScreens() {
     NectarTheme {
         OnBoard()
     }

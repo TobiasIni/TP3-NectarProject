@@ -9,6 +9,7 @@ import com.example.nectar.SplashScreem.SplashScreen
 import com.example.nectar.detail.DetailScreen
 import com.example.nectar.singin.Login
 import com.example.nectar.home.HomeScreen
+import com.example.nectar.location.LocationScreen
 
 
 @Composable
@@ -30,6 +31,9 @@ fun AppNavigation() {
         }
         composable(AppScreems.DetailsScreen.route) {
             DetailScreen(navController)  // Asegúrate de que DetailScreen reciba navController
+        }
+        composable (AppScreems.selectLocationScreen.route){
+            LocationScreen(navController)
         }
     }
 }

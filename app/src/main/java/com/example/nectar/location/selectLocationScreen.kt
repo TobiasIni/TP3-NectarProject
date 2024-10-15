@@ -168,7 +168,7 @@ fun ListasDesplegables(navController: NavController) {
         }
         Spacer(modifier = Modifier.padding(top = 25.dp))
         BotonPrincipal(body = "Submit", color = VerdePersonalizado, onClick = {navController.navigate(
-            AppScreems.HomeScreen.route)})
+            AppScreems.SignInScreen.route)})
     }
 }
 

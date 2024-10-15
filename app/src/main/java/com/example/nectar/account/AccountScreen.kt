@@ -31,18 +31,22 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.nectar.BottomNavigationBar
 import com.example.nectar.CustomTopBar
 import com.example.nectar.R
+import com.example.nectar.ThemeSwitcher
+import com.example.nectar.navigation.AppScreems
 
 @Composable
 @Preview(showBackground = true)
-fun AccountPreview() {
-    AccountScreen()
+fun AccountPreview(navController: NavController = rememberNavController()) {
+    AccountScreen(navController)
 }
 
 @Composable
-fun AccountScreen() {
+fun AccountScreen(navController: NavController) {
     CustomTopBar(title = "Account")
     Column(
         modifier = Modifier
@@ -108,15 +112,12 @@ fun AccountScreen() {
                     style = MaterialTheme.typography.bodyMedium,
                     modifier = Modifier.weight(1f)
                 )
-                Switch(
-                    checked = darkModeEnabled,
-                    onCheckedChange = { darkModeEnabled = it }
-                )
+                ThemeSwitcher()
             }
         }
 
         // Botón de Log Out
-        BotonLogout()
+        BotonLogout(navController)
         Spacer(modifier = Modifier.size(50.dp))
         BottomNavigationBar()
     }
@@ -124,9 +125,9 @@ fun AccountScreen() {
 }
 
 @Composable
-fun BotonLogout() {
+fun BotonLogout(navController: NavController) {
     Button(
-        onClick = { /* Acción de cerrar sesión */ },
+        onClick = { navController.navigate(AppScreems.SignInScreen.route) },
         colors = ButtonDefaults.buttonColors(
             Color.Gray
         ),

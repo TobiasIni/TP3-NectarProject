@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -45,7 +46,6 @@ fun Explore(navController: NavController) {
         Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
             CategoryList(categories = categories, navController = navController)
         }
-        Spacer(modifier = Modifier.size(4.dp))
         Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.BottomCenter) {
             BottomNavigationBar(navController)
         }
@@ -81,7 +81,8 @@ fun ProductSection(title: String, products: List<Product>, navController: NavCon
                     navController = navController,
                     product = product,
                     modifier = Modifier
-                        .width(180.dp) // Ajusta el ancho de cada tarjeta de producto
+                        .width(100.dp)
+                        .height(20.dp)// Ajusta el ancho de cada tarjeta de producto
                         .padding(end = 8.dp)
                 )
             }

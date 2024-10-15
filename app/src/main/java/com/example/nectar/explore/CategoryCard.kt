@@ -51,7 +51,7 @@ fun CategoryCard(category: Category, navController: NavController, modifier: Mod
         ),
         modifier = modifier
             .width(150.dp)
-            .height(225.dp)
+            .height(180.dp)
             .border(1.dp, lightGrayColor, shape = RoundedCornerShape(10.dp)),
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
     ) {

@@ -28,6 +28,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.NavController
 import com.example.nectar.BottomNavBarPreview
+import com.example.nectar.BottomNavigationBar
 import com.example.nectar.CustomTopBar
 import com.example.nectar.R
 import com.example.nectar.ui.theme.NectarTheme
@@ -42,7 +43,7 @@ fun HomeScreen(navController: NavController) {
     NectarTheme {
         Scaffold (
             topBar = { CustomTopBar("Shop") },
-            bottomBar = { BottomNavBarPreview() }
+            bottomBar = { BottomNavigationBar(navController = navController) }
         ){  paddingValues ->
             LazyColumn (
                 modifier = Modifier

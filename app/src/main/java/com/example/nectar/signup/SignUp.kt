@@ -86,7 +86,7 @@ fun Login(navController: NavController) {
         Spacer(modifier = Modifier.padding(15.dp))
         Box(modifier = Modifier.align(Alignment.CenterHorizontally)){
             BotonPrincipal(body = "Sign Up", color = VerdePersonalizado, onClick = {navController.navigate(
-                AppScreems.HomeScreen.route)})
+                AppScreems.selectLocationScreen.route)})
             }
         Text(
             text = "Already have an account? SignUp",

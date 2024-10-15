@@ -9,7 +9,7 @@ import com.example.nectar.SplashScreen
 import com.example.nectar.detail.DetailScreen
 import com.example.nectar.singin.Login
 import com.example.nectar.home.HomeScreen
-import com.example.nectar.navigation.AppScreems
+
 
 @Composable
 fun AppNavigation() {

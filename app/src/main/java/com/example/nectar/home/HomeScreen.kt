@@ -32,6 +32,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.nectar.BottomNavigationBar
+import com.example.nectar.CustomTopBar
 import com.example.nectar.R
 import com.example.nectar.ui.theme.NectarTheme
 import com.example.nectar.ui.theme.components.Product
@@ -47,9 +48,8 @@ fun HomeScreen(navController: NavController) {
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(16.dp)
             ) {
-                TopAppBar()
+                CustomTopBar(title = "Shop")
                 LocationBar()
                 CarouselBanner()
                 ProductSection(
@@ -62,7 +62,7 @@ fun HomeScreen(navController: NavController) {
                     products = sampleProducts,
                     navController = navController
                 )
-                Spacer(modifier = Modifier.weight(1f))
+                Spacer(modifier = Modifier.weight(0.9f))
                 BottomNavigationBar()
             }
         }

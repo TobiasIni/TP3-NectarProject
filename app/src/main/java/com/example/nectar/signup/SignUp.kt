@@ -1,6 +1,7 @@
 package com.example.nectar.signup
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -9,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -21,6 +23,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -88,14 +91,19 @@ fun Login(navController: NavController) {
             BotonPrincipal(body = "Sign Up", color = VerdePersonalizado, onClick = {navController.navigate(
                 AppScreems.selectLocationScreen.route)})
             }
-        Text(
-            text = "Already have an account? SignUp",
-            fontSize = 18.sp,
-            color = Color.Black,
-            modifier = Modifier
-                .align(Alignment.CenterHorizontally)
-                .padding(top = 20.dp, start = 25.dp)
-        )
+        Row (modifier = Modifier.align(Alignment.CenterHorizontally)){
+            Text(text = "Already have an account?")
+            Spacer(modifier = Modifier.width(4.dp))
+            Text(
+                text = "Sign In",
+                color = VerdePersonalizado, // Color personalizado
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.clickable {
+                    // Navegar a la pantalla de registro
+                    navController.navigate(AppScreems.SignInScreen.route)
+
+                })
+        }
 
     }
 }

@@ -37,7 +37,7 @@ import com.example.nectar.navigation.AppScreems
 import com.example.nectar.ui.theme.VerdePersonalizado
 
 @Composable
-fun PopupErrorContent(navController: NavController, showDialog: Boolean) {
+fun PopupErrorContent(navController: NavController, showDialog: Boolean, onDismiss: () -> Unit) {
     if (showDialog) {
         Box(
             modifier = Modifier
@@ -51,7 +51,7 @@ fun PopupErrorContent(navController: NavController, showDialog: Boolean) {
             ) {
                 // Botón de cerrar en la esquina superior izquierda
                 IconButton(
-                    onClick = { /* Manejo de cerrar */ },
+                    onClick = onDismiss, // Cerrar el popup
                     modifier = Modifier.align(Alignment.Start)
                 ) {
                     Image(
@@ -61,46 +61,19 @@ fun PopupErrorContent(navController: NavController, showDialog: Boolean) {
                     )
                 }
 
-                // Imagen superior (la bolsa de compra)
-                Image(
-                    painter = painterResource(id = R.drawable.shopping_bag),
-                    contentDescription = "Bag",
-                    modifier = Modifier.size(120.dp),
-                    contentScale = ContentScale.Fit
-                )
+                // ... (el resto del contenido del popup)
 
-                Spacer(modifier = Modifier.height(16.dp))
-
-                Text(text = "Oops! Order Failed", fontSize = 18.sp, color = Color.Black)
-
-                Text(
-                    text = "Something went terribly wrong.",
-                    style = MaterialTheme.typography.labelSmall,
-                    color = Color.Gray
-                )
-
-                Spacer(modifier = Modifier.height(16.dp))
-
-                // Botón "Please try again"
+                // Cambia el botón "Please try again"
                 BotonPrincipal(
                     body = "Please try again",
                     color = VerdePersonalizado,
-                    onClick = { navController.navigate(AppScreems.HomeScreen.route) }
+                    onClick = {
+                        onDismiss() // Cerrar el popup al hacer clic
+                        navController.navigate(AppScreems.HomeScreen.route)
+                    }
                 )
 
-                Spacer(modifier = Modifier.height(14.dp))
-
-                // Botón "Back to Home"
-                val customButtonColors = ButtonDefaults.buttonColors(
-                    containerColor = Color.White // Color de fondo
-                )
-                Button(
-                    onClick = { navController.navigate(AppScreems.HomeScreen.route) },
-                    modifier = Modifier.fillMaxWidth(), // Cambié fillMaxSize() por fillMaxWidth()
-                    colors = customButtonColors
-                ) {
-                    Text(text = "Back to Home", color = Color.Black)
-                }
+                // ... (el resto del contenido del popup)
             }
         }
     }
@@ -110,16 +83,7 @@ fun PopupErrorContent(navController: NavController, showDialog: Boolean) {
 fun PopupError(navController: NavController) {
     var showDialog by remember { mutableStateOf(true) }
 
-    PopupErrorContent(navController, showDialog)
+    PopupErrorContent(navController, showDialog) {
+        showDialog = false // Cierra el popup
+    }
 }
-
-@Preview(showBackground = true)
-@Composable
-fun PopupErrorPreview() {
-    // Simulamos un NavController
-    val mockNavController = rememberNavController()
-
-    // Pasamos el controlador simulado a PopupError
-    PopupErrorContent(navController = mockNavController, showDialog = true)
-}
-

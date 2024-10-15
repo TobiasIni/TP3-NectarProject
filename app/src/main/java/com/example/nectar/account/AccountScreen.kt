@@ -119,7 +119,7 @@ fun AccountScreen(navController: NavController) {
         // Botón de Log Out
         BotonLogout(navController)
         Spacer(modifier = Modifier.size(50.dp))
-        BottomNavigationBar()
+        BottomNavigationBar(navController)
     }
 
 }

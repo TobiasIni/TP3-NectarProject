@@ -433,7 +433,7 @@ fun PreviewTopBar() {
 }
 
 @Composable
-fun BottomNavigationBar() {
+fun BottomNavigationBar(navController: NavController) {
     var selectedItem by remember { mutableStateOf(0) }
 
     // Lista de elementos de navegación con títulos y recursos de íconos
@@ -474,21 +474,31 @@ fun BottomNavigationBar() {
                     unselectedIconColor = unselectedColor,
                     unselectedTextColor = unselectedColor.copy(0.7f)
                 ),
-                onClick = { selectedItem = index }
+                onClick = {
+                    selectedItem = index
+                    when (index) {
+                        0 -> navController.navigate(AppScreems.HomeScreen.route) // Navegar a la pantalla de Shop
+                       // 1 -> navController.navigate(AppScreems.ExploreScreen.route) // Navegar a la pantalla de Explore
+                        2 -> navController.navigate(AppScreems.CartScreen.route) // Navegar a la pantalla de Cart
+                        3 -> navController.navigate(AppScreems.FavoriteScreen.route) // Navegar a la pantalla de Favourite
+                        4 -> navController.navigate(AppScreems.AccountScreen.route) // Navegar a la pantalla de Account
+                    }
+                }
             )
         }
     }
 }
 
-
-
 data class BottomNavItem(val title: String, val iconRes: Int)
 
 @Preview
 @Composable
-fun BottomNavBarPreview(){
-    BottomNavigationBar()
+fun BottomNavBarPreview() {
+    // Simulamos un NavController
+    val mockNavController = rememberNavController()
+    BottomNavigationBar(navController = mockNavController)
 }
+
 
 
 

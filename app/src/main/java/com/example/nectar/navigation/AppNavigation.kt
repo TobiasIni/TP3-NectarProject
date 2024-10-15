@@ -6,7 +6,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.nectar.OnBoard
 import com.example.nectar.SplashScreem.SplashScreen
+import com.example.nectar.cart.CartScreen
 import com.example.nectar.detail.DetailScreen
+import com.example.nectar.favorite.ProductScreen
 import com.example.nectar.singin.Login
 import com.example.nectar.home.HomeScreen
 import com.example.nectar.location.LocationScreen
@@ -34,6 +36,12 @@ fun AppNavigation() {
         }
         composable (AppScreems.selectLocationScreen.route){
             LocationScreen(navController)
+        }
+        composable(AppScreems.CartScreen.route){
+            CartScreen()
+        }
+        composable(AppScreems.FavoriteScreen.route){
+            ProductScreen(navController)
         }
     }
 }

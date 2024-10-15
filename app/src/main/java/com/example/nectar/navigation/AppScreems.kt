@@ -13,4 +13,5 @@ sealed class AppScreems(val route: String) {
     object selectLocationScreen : AppScreems("selectLocation_screen")
     object FavoriteScreen : AppScreems("favorite_screen")
     object ExploreScreen : AppScreems("explore_screen") // Cambié a "explore_screen" por consistencia
+    object Filter: AppScreems("filter_screen")
 }

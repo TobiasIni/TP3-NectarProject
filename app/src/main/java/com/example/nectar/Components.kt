@@ -194,12 +194,12 @@ fun ExpandableText(
     }
 }
 @Composable
-fun ExampleUsage() {
+fun ExampleUsage(title: String, descripcion: String) {
     ExpandableText(
-        title = { Text(text = "My Custom Title", fontSize = 20.sp, fontWeight = FontWeight.Bold) },
+        title = { Text(text = title, fontSize = 20.sp, fontWeight = FontWeight.Bold) },
         body = {
             Text(
-                text = "This is the body content that gets shown when expanded.",
+                text = descripcion,
                 fontSize = 16.sp,
                 modifier = Modifier.padding(top = 8.dp)
             )
@@ -223,11 +223,11 @@ fun AddItem() {
     }
 }
 
-@Preview(showBackground = true)
+
 @Composable
-fun CampoExpandible() {
+fun CampoExpandible(title: String, descripcion: String) {
     NectarTheme {
-        ExampleUsage()
+        ExampleUsage(title, descripcion)
     }
 }
 
@@ -421,7 +421,7 @@ fun CustomTopBar(title: String) {
                 Icon(Icons.Default.Menu, contentDescription = "Menu")
             }
         },
-        colors = TopAppBarDefaults.smallTopAppBarColors(containerColor = Color.White),
+        colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.White),
 
         )
 }

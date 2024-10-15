@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -27,6 +28,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.nectar.BottomNavigationBar
 import com.example.nectar.CustomTopBar
 import com.example.nectar.SearchBar
+import com.example.nectar.ui.theme.NectarTheme
 import com.example.nectar.ui.theme.components.Product
 import com.example.nectar.ui.theme.components.ProductCard
 import com.example.nectar.ui.theme.components.ProductList
@@ -36,18 +38,26 @@ import com.example.nectar.ui.theme.components.ProductList
 
 @Composable
 fun Explore(navController: NavController) {
-    Column(modifier = Modifier.fillMaxSize()) {
-        CustomTopBar(title = "Explore")
-        Spacer(modifier = Modifier.size(4.dp))
-        Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
-            SearchBar()
-        }
-        Spacer(modifier = Modifier.size(4.dp))
-        Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
-            CategoryList(categories = categories, navController = navController)
-        }
-        Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.BottomCenter) {
-            BottomNavigationBar(navController)
+    NectarTheme {
+        Scaffold (
+            topBar = {CustomTopBar(title = "Explore")},
+            bottomBar = { BottomNavigationBar(navController) }
+        ) { paddingValues ->
+            Column(modifier = Modifier
+                .fillMaxSize()
+                .padding(paddingValues)) {
+
+                Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
+                    SearchBar()
+                }
+                Spacer(modifier = Modifier.size(4.dp))
+                Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
+                    CategoryList(categories = categories, navController = navController)
+                }
+                Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.BottomCenter) {
+
+                }
+            }
         }
     }
 }

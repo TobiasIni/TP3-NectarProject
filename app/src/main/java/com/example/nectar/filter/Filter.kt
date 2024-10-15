@@ -16,9 +16,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults.buttonColors
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CheckboxDefaults
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -31,32 +29,40 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.nectar.BottomNavBarPreview
 import com.example.nectar.CustomTopBar
 import com.example.nectar.ui.theme.NectarTheme
 import com.example.nectar.ui.theme.verde
+import com.example.nectar.navigation.AppScreems
 
-val categories = listOf(
-    Category("Almacen", isSelected = false),
-    Category("Verduleria", isSelected = true),
-    Category("Carniceria", isSelected = false),
-    Category("Limpieza", isSelected = false),
-    Category("Lacteos", isSelected = false),
-    Category("Cocina", isSelected = false),
-    Category("Consumo Consciente", isSelected = false),
-    Category("Vegetariano/Vegano", isSelected = false)
+data class Category(
+    val name: String,
+    val isSelected: Boolean = false
 )
 
-
 @Composable
-fun FilterScreen(categories: List<Category>, onApplyFilters: (List<Category>) -> Unit) {
-    // Lista mutable para almacenar el estado de cada categoría
+fun FilterScreen(navController: NavController) {
+    val initialCategories = listOf(
+        Category("Almacen", isSelected = false),
+        Category("Verduleria", isSelected = true),
+        Category("Carniceria", isSelected = false),
+        Category("Limpieza", isSelected = false),
+        Category("Lacteos", isSelected = false),
+        Category("Cocina", isSelected = false),
+        Category("Consumo Consciente", isSelected = false),
+        Category("Vegetariano/Vegano", isSelected = false)
+    )
+
+    // Estado mutable para almacenar el estado de las categorías
+    var categoryStates by remember { mutableStateOf(initialCategories) }
+
     NectarTheme {
-        var categoryStates by remember { mutableStateOf(categories) }
-        Scaffold (
+        Scaffold(
             topBar = { CustomTopBar("Filtros") },
             bottomBar = { BottomNavBarPreview() }
-        ){  paddingValues ->
+        ) { paddingValues ->
             Column(
                 modifier = Modifier
                     .fillMaxSize()
@@ -67,7 +73,6 @@ fun FilterScreen(categories: List<Category>, onApplyFilters: (List<Category>) ->
                     modifier = Modifier
                         .fillMaxWidth()
                         .weight(1f) // Para que ocupe el espacio restante
-
                 ) {
                     LazyColumn {
                         items(categoryStates) { category ->
@@ -100,7 +105,15 @@ fun FilterScreen(categories: List<Category>, onApplyFilters: (List<Category>) ->
                 }
 
                 Button(
-                    onClick = { onApplyFilters(categoryStates.filter { it.isSelected }) },
+                    onClick = {
+                        // Filtra las categorías seleccionadas
+                        val selectedCategories = categoryStates.filter { it.isSelected }
+
+                        // Aquí podrías manejar lo que quieres hacer con las categorías seleccionadas
+                        // Por ejemplo, navegar a otra pantalla o mostrar un mensaje
+                        navController.navigate(AppScreems.HomeScreen.route) // Navegar a la HomeScreen o a otra pantalla
+
+                    },
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(16.dp),
@@ -113,18 +126,12 @@ fun FilterScreen(categories: List<Category>, onApplyFilters: (List<Category>) ->
                 }
             }
         }
-
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
-fun CategoryPreview(){
-    FilterScreen(categories = categories) {
-    }
+fun FilterScreenPreview() {
+    val navController = rememberNavController()
+    FilterScreen(navController = navController)
 }
-
-data class Category(
-    val name: String,
-    val isSelected: Boolean = false
-)

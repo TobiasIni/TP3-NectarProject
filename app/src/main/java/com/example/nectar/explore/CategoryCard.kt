@@ -18,6 +18,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -84,8 +85,9 @@ fun CategoryList(categories: List<Category>, navController: NavController, modif
         items(categories.chunked(2)) { rowCategories ->
             // Creamos una fila para cada grupo de 2 categorías
             Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(8.dp) // Espaciado entre las columnas
+                modifier = Modifier.fillMaxWidth()
+                    .padding(bottom = 8.dp),
+                horizontalArrangement = Arrangement.spacedBy(4.dp)
             ) {
                 rowCategories.forEach { category ->
                     CategoryCard(

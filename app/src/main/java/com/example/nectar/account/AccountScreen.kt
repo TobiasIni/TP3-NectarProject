@@ -19,8 +19,10 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -38,6 +40,7 @@ import com.example.nectar.CustomTopBar
 import com.example.nectar.R
 import com.example.nectar.ThemeSwitcher
 import com.example.nectar.navigation.AppScreems
+import com.example.nectar.ui.theme.NectarTheme
 
 @Composable
 @Preview(showBackground = true)
@@ -47,79 +50,84 @@ fun AccountPreview(navController: NavController = rememberNavController()) {
 
 @Composable
 fun AccountScreen(navController: NavController) {
-    CustomTopBar(title = "Account")
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp)
-    ) {
-        Spacer(modifier = Modifier.size(50.dp))
-        // Imagen de perfil, nombre y correo
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(bottom = 16.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-
-            Image(
-                painter = painterResource(id = R.drawable.profile_picture), // Imagen de perfil
-                contentDescription = "Profile Picture",
+    NectarTheme {
+        Scaffold (
+            topBar = { CustomTopBar("Shop") },
+            bottomBar = { BottomNavigationBar(navController = navController) }
+        ){ paddingValues ->
+            Column(
                 modifier = Modifier
-                    .size(60.dp)
-                    .clip(CircleShape)
-                    .border(1.5.dp, MaterialTheme.colorScheme.primary, CircleShape)
-            )
-            Spacer(modifier = Modifier.width(16.dp))
-            Column {
-                Text(
-                    text = "Afsar Hossen",
-                    style = MaterialTheme.typography.headlineSmall,
-                    fontWeight = FontWeight.Bold
-                )
-                Text(
-                    text = "lmshuvo97@gmail.com",
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = Color.Gray
-                )
-            }
-        }
-
-        // Lista de opciones con imágenes en lugar de íconos
-        Column(
-            modifier = Modifier
-                .weight(1f) // Ocupa el espacio disponible
-                .fillMaxWidth()
-        ) {
-            AccountOption(imageResId = R.drawable.order, title = "Orders")
-            AccountOption(imageResId = R.drawable.details, title = "My Details")
-            AccountOption(imageResId = R.drawable.ubication, title = "Delivery Address")
-            AccountOption(imageResId = R.drawable.creditcard_icon, title = "Payment Methods")
-            AccountOption(imageResId = R.drawable.cupon, title = "Promo Cord")
-            AccountOption(imageResId = R.drawable.notification, title = "Notifications")
-            AccountOption(imageResId = R.drawable.helpicon, title = "Help")
-
-            // Dark mode toggle
-            var darkModeEnabled = remember { false } // Estado del modo oscuro
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 16.dp),
-                verticalAlignment = Alignment.CenterVertically
+                    .fillMaxSize()
+                    .padding(paddingValues)
             ) {
-                Text(
-                    text = "Dark mode",
-                    style = MaterialTheme.typography.bodyMedium,
-                    modifier = Modifier.weight(1f)
-                )
-                ThemeSwitcher()
+                // Imagen de perfil, nombre y correo
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(start = 16.dp, bottom = 16.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+
+                    Image(
+                        painter = painterResource(id = R.drawable.profile_picture), // Imagen de perfil
+                        contentDescription = "Profile Picture",
+                        modifier = Modifier
+                            .size(60.dp)
+                            .clip(CircleShape)
+                            .border(1.5.dp, MaterialTheme.colorScheme.primary, CircleShape)
+                    )
+                    Column (modifier = Modifier
+                        .padding(start = 15.dp)){
+                        Text(
+                            text = "Afsar Hossen",
+                            style = MaterialTheme.typography.headlineSmall,
+                            fontWeight = FontWeight.Bold
+                        )
+                        Text(
+                            text = "lmshuvo97@gmail.com",
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = Color.Gray
+                        )
+                    }
+                }
+
+                // Lista de opciones con imágenes en lugar de íconos
+                Column(
+                    modifier = Modifier
+                        .weight(1f) // Ocupa el espacio disponible
+                        .fillMaxWidth()
+                        .padding(10.dp)
+                ) {
+                    AccountOption(imageResId = R.drawable.order, title = "Orders")
+                    AccountOption(imageResId = R.drawable.details, title = "My Details")
+                    AccountOption(imageResId = R.drawable.ubication, title = "Delivery Address")
+                    AccountOption(imageResId = R.drawable.creditcard_icon, title = "Payment Methods")
+                    AccountOption(imageResId = R.drawable.cupon, title = "Promo Cord")
+                    AccountOption(imageResId = R.drawable.notification, title = "Notifications")
+                    AccountOption(imageResId = R.drawable.helpicon, title = "Help")
+
+                    // Dark mode toggle
+                    var darkModeEnabled = remember { false } // Estado del modo oscuro
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(vertical = 16.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            text = "Dark mode",
+                            style = MaterialTheme.typography.bodyMedium,
+                            modifier = Modifier.weight(1f)
+                        )
+                        ThemeSwitcher()
+                    }
+                }
+
+                // Botón de Log Out
+                BotonLogout(navController)
+                Spacer(modifier = Modifier.size(30.dp))
             }
         }
-
-        // Botón de Log Out
-        BotonLogout(navController)
-        Spacer(modifier = Modifier.size(50.dp))
-        BottomNavigationBar(navController)
     }
 
 }

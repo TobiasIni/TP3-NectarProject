@@ -29,6 +29,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.nectar.BottomNavigationBar
 import com.example.nectar.R
 import com.example.nectar.ui.theme.NectarTheme
@@ -37,9 +39,9 @@ import com.example.nectar.ui.theme.components.ProductCard
 import com.example.nectar.ui.theme.components.sampleProducts
 import androidx.compose.foundation.Image as Image
 
-@Preview
+
 @Composable
-fun HomeScreen() {
+fun HomeScreen(navController: NavController) {
     Surface {
         NectarTheme {
             Column(
@@ -52,11 +54,13 @@ fun HomeScreen() {
                 CarouselBanner()
                 ProductSection(
                     title = "Exclusive Offer",
-                    products = sampleProducts
+                    products = sampleProducts,
+                    navController = navController
                 )
                 ProductSection(
                     title = "Best Selling",
-                    products = sampleProducts
+                    products = sampleProducts,
+                    navController = navController
                 )
                 Spacer(modifier = Modifier.weight(1f))
                 BottomNavigationBar()
@@ -113,7 +117,7 @@ fun CarouselBanner() {
 }
 
 @Composable
-fun ProductSection(title: String, products: List<Product>) {
+fun ProductSection(title: String, products: List<Product>, navController: NavController) {
     Column(
         modifier = Modifier.padding(vertical = 8.dp)
     ) {
@@ -137,7 +141,7 @@ fun ProductSection(title: String, products: List<Product>) {
             modifier = Modifier.padding(vertical = 8.dp)
         ) {
             items(products) { product ->
-                ProductCard(
+                ProductCard(navController = navController,
                     product = product,
                     modifier = Modifier
                         .width(180.dp) // Ajusta el ancho de cada tarjeta de producto
@@ -148,7 +152,9 @@ fun ProductSection(title: String, products: List<Product>) {
     }
 }
 
+@Preview(showBackground = true)
 @Composable
-fun BottomNavigationBarPreview() {
-    BottomNavigationBar()
+fun homeScreenPreview() {
+    val navController = rememberNavController()
+    HomeScreen(navController = navController)
 }

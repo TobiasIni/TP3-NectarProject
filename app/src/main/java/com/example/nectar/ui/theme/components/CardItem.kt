@@ -28,7 +28,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.nectar.R
+import com.example.nectar.navigation.AppScreems
 import com.example.nectar.ui.theme.lightGrayColor
 import com.example.nectar.ui.theme.verde
 
@@ -42,97 +45,97 @@ val sampleProducts = listOf(
 
 val product = Product(R.drawable.banana, "Bananas", "1 kg.", "$2.000")
 
-    @Composable
-    fun ProductCard(product: Product, modifier: Modifier = Modifier) {
-        Card(
-            colors = CardDefaults.cardColors(
-                containerColor = Color.White
-            ),
-            modifier = modifier
-                .width(150.dp)
-                .height(225.dp)
-                .border(1.dp, lightGrayColor, shape = RoundedCornerShape(10.dp)),
-            elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+@Composable
+fun ProductCard(product: Product, navController: NavController, modifier: Modifier = Modifier) {
+    Card(
+        colors = CardDefaults.cardColors(
+            containerColor = Color.White
+        ),
+        modifier = modifier
+            .width(150.dp)
+            .height(225.dp)
+            .border(1.dp, lightGrayColor, shape = RoundedCornerShape(10.dp)),
+        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+    ) {
+        Column(
+            modifier = Modifier
+                .padding(16.dp, 10.dp, 16.dp, 10.dp)
+                .fillMaxWidth(),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            Column(
+            Image(
+                painter = painterResource(id = product.imageRes),
+                contentDescription = product.name,
+                contentScale = ContentScale.Crop,
                 modifier = Modifier
-                    .padding(16.dp, 10.dp, 16.dp, 10.dp)
-                    .fillMaxWidth(),
-                verticalArrangement = Arrangement.spacedBy(8.dp)
+                    .fillMaxWidth()
+                    .height(90.dp)
+            )
+            Text(
+                text = product.name,
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold
+            )
+            Text(
+                text = product.details,
+                fontSize = 12.sp,
+                color = Color.Gray
+            )
+            Row(
+                modifier = Modifier
+                    .width(150.dp)
+                    .height(90.dp)
+                    .padding(2.dp),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                Image(
-                    painter = painterResource(id = product.imageRes),
-                    contentDescription = product.name,
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(90.dp)
-                )
                 Text(
-                    text = product.name,
-                    fontSize = 18.sp,
+                    text = product.price,
+                    fontSize = 16.sp,
                     fontWeight = FontWeight.Bold
                 )
-                Text(
-                    text = product.details,
-                    fontSize = 12.sp,
-                    color = Color.Gray
-                )
-                Row(
-                    modifier = Modifier
-                        .width(150.dp)
-                        .height(90.dp)
-                        .padding(2.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
+
+                Button(
+                    onClick = {
+                        navController.navigate(AppScreems.DetailsScreen.route)
+                    },
+                    modifier = Modifier.size(60.dp),
+                    colors = buttonColors(
+                        containerColor = verde,
+                        contentColor = Color.White
+                    ),
                 ) {
                     Text(
-                        text = product.price,
-                        fontSize = 16.sp,
-                        fontWeight = FontWeight.Bold
-
+                        text = "+",
+                        fontSize = 18.sp
                     )
-
-                    Button(
-                        onClick = {
-
-                        },
-                        modifier = Modifier.size(60.dp),
-                        colors = buttonColors(
-                            containerColor = verde,
-                            contentColor = Color.White
-                        ),
-                        ) {
-                        Text(
-                            text = "+",
-                            fontSize = 18.sp,
-                            //modifier = Modifier.align(Arrangement.)
-                        )
-                    }
                 }
             }
         }
     }
+}
 
-    @Preview(showBackground = true)
-    @Composable
-    fun ProductPreview() {
-        ProductCard(product = product)
-    }
+@Preview(showBackground = true)
+@Composable
+fun ProductPreview(navController: NavController = rememberNavController()) {
+    ProductCard(product = product, navController = navController)
+}
 
-    @Composable
-    fun ProductList(products: List<Product>, modifier: Modifier = Modifier) {
-        LazyRow(modifier = modifier.padding(16.dp)) {
-            items(products) { product ->
-                ProductCard(
-                    product = product,
-                    modifier = Modifier.padding(0.dp, 0.dp,8.dp,0.dp))
-            }
+@Composable
+fun ProductList(products: List<Product>, navController: NavController, modifier: Modifier = Modifier) {
+    LazyRow(modifier = modifier.padding(16.dp)) {
+        items(products) { product ->
+            ProductCard(
+                product = product,
+                navController = navController, // Asegúrate de pasar navController aquí
+                modifier = Modifier.padding(0.dp, 0.dp, 8.dp, 0.dp)
+            )
         }
     }
+}
 
-    @Preview(showBackground = true)
-    @Composable
-    fun ProductListPreview() {
-        ProductList(products = sampleProducts)
-    }
+@Preview(showBackground = true)
+@Composable
+fun ProductListPreview(navController: NavController = rememberNavController()) {
+    ProductList(products = sampleProducts, navController = navController)
+}

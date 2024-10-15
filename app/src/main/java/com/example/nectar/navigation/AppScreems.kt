@@ -10,4 +10,6 @@ sealed class AppScreems(val route: String) {
     object CartScreen : AppScreems("cart_screen")
     object HomeScreen : AppScreems("home_screen")
     object DetailsScreen : AppScreems("details_screen")
+    object SignUp : AppScreems("signup_screen")
+    object selectLocationScreen : AppScreems("selectLocation_screen")
 }

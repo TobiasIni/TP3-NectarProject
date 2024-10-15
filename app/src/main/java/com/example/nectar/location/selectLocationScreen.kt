@@ -27,12 +27,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.nectar.BotonPrincipal
 import com.example.nectar.R
+import com.example.nectar.navigation.AppScreems
 import com.example.nectar.ui.theme.VerdePersonalizado
 
 @Composable
-fun LocationScreen() {
+fun LocationScreen(navController: NavController) {
     Column(modifier = Modifier.fillMaxSize()) {
         // Imagen centrada horizontalmente
         Box(modifier = Modifier.align(Alignment.CenterHorizontally)) {
@@ -70,7 +73,7 @@ fun LocationScreen() {
         }
 
         // Llamada a la función que muestra las listas desplegables
-        ListasDesplegables()
+        ListasDesplegables(navController)
     }
 }
 
@@ -79,7 +82,7 @@ fun LocationScreen() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ListasDesplegables() {
+fun ListasDesplegables(navController: NavController) {
     // Estados para los valores seleccionados en ambos desplegables
     var selectedZone by remember { mutableStateOf("Selecciona una zona") }
     var expandedZone by remember { mutableStateOf(false) }
@@ -164,7 +167,8 @@ fun ListasDesplegables() {
             }
         }
         Spacer(modifier = Modifier.padding(top = 25.dp))
-        BotonPrincipal(body = "Submit", color = VerdePersonalizado, onClick = {})
+        BotonPrincipal(body = "Submit", color = VerdePersonalizado, onClick = {navController.navigate(
+            AppScreems.HomeScreen.route)})
     }
 }
 
@@ -173,7 +177,7 @@ fun ListasDesplegables() {
 
 @Composable
 @Preview(showBackground = true)
-    fun LocationScreenPreview (){
-        LocationScreen()
+    fun LocationScreenPreview (navController: NavController = rememberNavController()){
+        LocationScreen(navController)
     }
 

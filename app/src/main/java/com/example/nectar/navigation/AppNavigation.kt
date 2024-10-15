@@ -6,6 +6,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.nectar.OnBoard
 import com.example.nectar.SplashScreen
+import com.example.nectar.detail.DetailScreen
 import com.example.nectar.singin.Login
 import com.example.nectar.home.HomeScreen
 import com.example.nectar.navigation.AppScreems.MainScreen
@@ -21,7 +22,6 @@ fun AppNavigation() {
         composable(AppScreems.OnBoard.route) {
             OnBoard(navController)  // Aquí pasas el navController
         }
-
 
         composable(AppScreems.SignInScreen.route) {
             Login(navController)  // Esta es la pantalla de SignIn
@@ -43,7 +43,10 @@ fun AppNavigation() {
                 MainScreen
             }
             composable(AppScreems.HomeScreen.route) {
-                HomeScreen()
+                HomeScreen(navController)
+            }
+            composable (AppScreems.DetailsScreen.route){
+                DetailScreen()
             }
         }
     }

@@ -412,7 +412,10 @@ fun PreviewThemeSwitcher() {
 @Composable
 fun CustomTopBar(title: String) {
     TopAppBar(
-        title = { Text(text = title) },
+        title = {
+            Text(
+                text = title,
+                fontWeight = FontWeight.Bold)},
         navigationIcon = {
             IconButton(onClick = { /* Acción para abrir el menú */ }) {
                 Icon(Icons.Default.Menu, contentDescription = "Menu")

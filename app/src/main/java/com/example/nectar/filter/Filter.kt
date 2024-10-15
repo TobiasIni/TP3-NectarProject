@@ -17,6 +17,7 @@ import androidx.compose.material3.ButtonDefaults.buttonColors
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CheckboxDefaults
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -30,6 +31,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.nectar.BottomNavBarPreview
+import com.example.nectar.CustomTopBar
 import com.example.nectar.ui.theme.NectarTheme
 import com.example.nectar.ui.theme.verde
 
@@ -48,24 +51,18 @@ val categories = listOf(
 @Composable
 fun FilterScreen(categories: List<Category>, onApplyFilters: (List<Category>) -> Unit) {
     // Lista mutable para almacenar el estado de cada categoría
-    Surface {
-        NectarTheme {
-            var categoryStates by remember { mutableStateOf(categories) }
-
+    NectarTheme {
+        var categoryStates by remember { mutableStateOf(categories) }
+        Scaffold (
+            topBar = { CustomTopBar("Filtros") },
+            bottomBar = { BottomNavBarPreview() }
+        ){  paddingValues ->
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(16.dp)
+                    .padding(paddingValues)
                     .border(width = 2.dp, color = Color(0xFFDC220), shape = RoundedCornerShape(10.dp))
             ) {
-                Text(
-                    text = "Filtros",
-
-                    fontWeight = FontWeight.Bold,
-                    style = MaterialTheme.typography.headlineLarge,
-                    modifier = Modifier.padding(bottom = 16.dp)
-                )
-
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -106,7 +103,7 @@ fun FilterScreen(categories: List<Category>, onApplyFilters: (List<Category>) ->
                     onClick = { onApplyFilters(categoryStates.filter { it.isSelected }) },
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(top = 16.dp),
+                        .padding(16.dp),
                     colors = buttonColors(
                         containerColor = verde,
                         contentColor = Color.White
@@ -116,6 +113,7 @@ fun FilterScreen(categories: List<Category>, onApplyFilters: (List<Category>) ->
                 }
             }
         }
+
     }
 }
 
